@@ -1,4 +1,4 @@
-# Robust Reflection Removal with Reflection-free Flash-only Cues
+# Robust Reflection Removal with Reflection-free Flash-only Cues (RFC)
 <img src='example.jpg'/>
 
 ### [Project Page]() | [Video]() | [Paper]() | [Data]()
