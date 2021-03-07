@@ -82,7 +82,7 @@ if ckpt and continue_training:
     saver_restore.restore(sess,ckpt.model_checkpoint_path)
 
 
-data_dir = "./data/{}".format(ARGS.testset)
+data_dir = "./data/{}/withgt".format(ARGS.testset)
 data_names = sorted(glob(data_dir+"/*ambient.jpg"))
 
 def crop_shape(tmp_all, size=32):
