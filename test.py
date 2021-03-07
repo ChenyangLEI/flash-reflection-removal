@@ -7,7 +7,6 @@ import numpy as np
 import argparse
 import subprocess
 from scipy.misc import imread, imsave
-import utils.utils as utils
 from model.network import UNet as UNet
 from model.network import UNet_SE as UNet_SE
 from glob import glob
@@ -86,6 +85,12 @@ if ckpt and continue_training:
 data_dir = "./data/{}".format(ARGS.testset)
 data_names = sorted(glob(data_dir+"/*ambient.jpg"))
 
+def crop_shape(tmp_all, size=32):
+    h,w = tmp_all.shape[1:3]
+    h = h // size * size
+    w = w // size * size
+    return h, w
+
 num_test = len(data_names)
 print(num_test)
 for epoch in range(9999, 10000):
@@ -104,7 +109,7 @@ for epoch in range(9999, 10000):
         tmp_pureflash = imread(data_names[id].replace("ambient.jpg", "pureflash.jpg"))[None,...] / 255.
         tmp_ambient = imread(data_names[id])[None,...] / 255.
         tmp_flash = imread(data_names[id].replace("ambient.jpg", "flash.jpg"))[None,...] / 255.
-        h,w = utils.crop_shape(tmp_ambient, size=32)
+        h,w = crop_shape(tmp_ambient, size=32)
         tmp_ambient, tmp_pureflash, tmp_flash = tmp_ambient[:,:h,:w,:], tmp_pureflash[:,:h,:w,:], tmp_flash[:,:h,:w,:]
         pred_image_t, pred_image_r, in_ambient, in_flash, in_pureflash, pred_mask = sess.run(fetch_list,
             feed_dict={input_ambient:tmp_ambient, input_pureflash:tmp_pureflash, input_flash: tmp_flash})
