@@ -1,4 +1,5 @@
 # Robust Reflection Removal with Reflection-free Flash-only Cues
+<img src='example.jpg'/>
 
 ### [Project Page]() | [Video]() | [Paper]() | [Data]()
 
@@ -12,9 +13,9 @@ Tensorflow implementation for: <br>
 in CVPR 2021 
 
 ## To Do
+- [x] Release test code
 - [ ] Prepare paper and upload to arxiv
 - [ ] Make project page
-- [ ] Release test code
 - [ ] Release training code
 - [ ] Release dataset
 - [ ] Release raw data processing code
@@ -24,17 +25,32 @@ in CVPR 2021
 To setup a conda environment, test on demo data:
 ```
 conda env create -f environment.yml
-conda activate flash-rr
-python demo.py
+conda activate flashrr-rfc
+bash download.sh
+python test.py
 ```
 
 ## Setup
 
-Python 3 dependencies:
+### Environment
+This code is based on tensorflow. It has been tested on Ubuntu 18.04 LTS.
 
-* Tensorflow 1.13
-* numpy
-* imageio
+Anaconda is recommended: [Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-anaconda-python-distribution-on-ubuntu-18-04)
+| [Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-anaconda-python-distribution-on-ubuntu-16-04)
+
+After installing Anaconda, you can setup the environment simply by
+
+```
+conda env create -f environment.yml
+```
+
+### Download checkpoint and VGG model
+
+Download the ckpt and VGG model by
+```
+bash download.sh
+```
+
 
 
 ## What is a RFC (Reflection-free Flash-only Cue)?
