@@ -20,7 +20,7 @@ random.seed(seed)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model", default="full_global_lp",help="path to folder containing the model")
-parser.add_argument("--testset", default="real",help="path to folder containing the model")
+parser.add_argument("--testset", default="demo",help="path to folder containing the model")
 ARGS = parser.parse_args()
 model=ARGS.model
 
