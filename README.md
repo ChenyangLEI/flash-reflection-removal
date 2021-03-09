@@ -77,7 +77,7 @@ If you find our work useful for your research, please consider citing the follow
 or 
 
 ```
-@InProceedings{Lei_2020_CVPR,
+@InProceedings{Lei_2021_RFC,
      title={Robust Reflection Removal with Reflection-free Flash-only Cues}, 
      author={Chenyang Lei and Qifeng Chen},
      booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
