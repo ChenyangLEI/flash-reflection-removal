@@ -1,7 +1,7 @@
 # Robust Reflection Removal with Reflection-free Flash-only Cues (RFC)
 <img src='example.jpg'/>
 
-### To be released: [Project Page]() | [Video]() | [Paper]() | [Data]()
+### [Paper](https://arxiv.org/pdf/2103.04273.pdf) | To be released: [Project Page]() | [Video]() | [Data]()
 
 
 Tensorflow implementation for: <br>
@@ -63,8 +63,28 @@ We propose a simple yet effective reflection-free cue for robust reflection remo
 
 If you find our work useful for your research, please consider citing the following papers :)
 
+```
+@misc{lei2021robust,
+      title={Robust Reflection Removal with Reflection-free Flash-only Cues}, 
+      author={Chenyang Lei and Qifeng Chen},
+      year={2021},
+      eprint={2103.04273},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
-If you are also interested in the other reflection removal methods, please refer to [this work]().
+or 
+
+```
+@InProceedings{Lei_2020_CVPR,
+     title={Robust Reflection Removal with Reflection-free Flash-only Cues}, 
+     author={Chenyang Lei and Qifeng Chen},
+     booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+     year = {2021}
+}
+```
+If you are also interested in the polarization reflection removal, please refer to [this work](https://github.com/ChenyangLEI/polarization-reflection-removal).
 
 
 ## Contact
