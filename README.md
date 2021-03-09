@@ -14,7 +14,7 @@ in CVPR 2021
 
 ## To Do
 - [x] Release test code
-- [ ] Prepare paper and upload to arxiv
+- [x] Prepare paper and upload to arxiv
 - [ ] Make project page
 - [ ] Release training code
 - [ ] Release dataset
