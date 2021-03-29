@@ -20,7 +20,7 @@ random.seed(seed)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model", default="full_global_lp",help="path to folder containing the model")
-parser.add_argument("--testset", default="demo",help="path to folder containing the model")
+parser.add_argument("--testset", default="./data/demo",help="path to folder containing the model")
 ARGS = parser.parse_args()
 model=ARGS.model
 
@@ -82,7 +82,7 @@ if ckpt and continue_training:
     saver_restore.restore(sess,ckpt.model_checkpoint_path)
 
 
-data_dir = "./data/{}/withgt".format(ARGS.testset)
+data_dir = "{}/others".format(ARGS.testset)
 data_names = sorted(glob(data_dir+"/*ambient.jpg"))
 
 def crop_shape(tmp_all, size=32):

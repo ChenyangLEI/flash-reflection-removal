@@ -1,7 +1,7 @@
 # Robust Reflection Removal with Reflection-free Flash-only Cues (RFC)
 <img src='example.jpg'/>
 
-### [Paper](https://arxiv.org/pdf/2103.04273.pdf) | [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) | To be released: [Video]() | [Data]()
+### [Paper](https://arxiv.org/pdf/2103.04273.pdf) | [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) | [Data](https://hkustconnect-my.sharepoint.com/:u:/g/personal/cleiaa_connect_ust_hk/EWv1afaxrhFKlbT7iX0b8FMB8R1ZeNyUWRQM__A_SPkVGQ?e=8IbhE6) | To be released: [Video]()
 
 
 Tensorflow implementation for: <br>
@@ -16,8 +16,8 @@ in CVPR 2021
 - [x] Release test code
 - [x] Prepare paper and upload to arxiv
 - [x] Make project page
-- [ ] Release training code
-- [ ] Release dataset
+- [x] Release training code
+- [x] Release dataset
 - [ ] Release raw data processing code
 
 ## TL;DR quickstart
@@ -46,11 +46,33 @@ conda env create -f environment.yml
 
 ### Download checkpoint and VGG model
 
-Download the ckpt and VGG model by
+You can download the ckpt and VGG model by
 ```
 bash download.sh
 ```
 
+## Quick inference 
+You can get the results for the demo data by:
+```
+python test.py
+```
+
+If you prepare your own dataset, note that each data sample must contains an ambient image and a flash-only iamge:
+```
+python test.py --testset /path/to/your/testset
+```
+
+## Training 
+### Reproduce our results
+First, download the dataset:
+```
+bash download_data.sh
+```
+
+Then, you can train a model by
+```
+python train.py --model YOUR_MODEL_NAME
+```
 
 
 ## What is a RFC (Reflection-free Flash-only Cue)?
@@ -64,19 +86,6 @@ We propose a simple yet effective reflection-free cue for robust reflection remo
 If you find our work useful for your research, please consider citing the following papers :)
 
 ```
-@misc{lei2021robust,
-      title={Robust Reflection Removal with Reflection-free Flash-only Cues}, 
-      author={Chenyang Lei and Qifeng Chen},
-      year={2021},
-      eprint={2103.04273},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
-```
-
-or 
-
-```
 @InProceedings{Lei_2021_RFC,
      title={Robust Reflection Removal with Reflection-free Flash-only Cues}, 
      author={Chenyang Lei and Qifeng Chen},
@@ -86,6 +95,9 @@ or
 ```
 If you are also interested in the polarization reflection removal, please refer to [this work](https://github.com/ChenyangLEI/polarization-reflection-removal).
 
+If you use the synthetic dataset, please cite these two papers since we use their data to synthesize the images:
+- [Flash dataset](http://yaksoy.github.io/flashambient/)
+- [CoRRN](https://github.com/wanrenjie/CoRRN)
 
 ## Contact
 
