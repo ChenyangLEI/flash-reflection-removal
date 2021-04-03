@@ -1,7 +1,7 @@
 # Robust Reflection Removal with Reflection-free Flash-only Cues (RFC)
 <img src='example.jpg'/>
 
-### [Paper](https://arxiv.org/pdf/2103.04273.pdf) | [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) | [Data](https://hkustconnect-my.sharepoint.com/:u:/g/personal/cleiaa_connect_ust_hk/EWv1afaxrhFKlbT7iX0b8FMB8R1ZeNyUWRQM__A_SPkVGQ?e=8IbhE6) | To be released: [Video]()
+### [Paper](https://arxiv.org/pdf/2103.04273.pdf) | [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) | [Data](https://hkustconnect-my.sharepoint.com/:u:/g/personal/cleiaa_connect_ust_hk/EWv1afaxrhFKlbT7iX0b8FMB8R1ZeNyUWRQM__A_SPkVGQ?e=8IbhE6) | [Other datasets](https://alexzhao-hugga.github.io/Real-World-Reflection-Removal/) To be released: [Video]()
 
 
 Tensorflow implementation for: <br>
