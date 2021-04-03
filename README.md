@@ -18,7 +18,7 @@ in CVPR 2021
 - [x] Make project page
 - [x] Release training code
 - [x] Release dataset
-- [ ] Release raw data processing code
+- [x] Release raw data processing code
 
 ## TL;DR quickstart
 
@@ -74,6 +74,15 @@ Then, you can train a model by
 python train.py --model YOUR_MODEL_NAME
 ```
 
+## Raw data preprocessing
+First, download raw images on [OneDrive](https://hkustconnect-my.sharepoint.com/:f:/g/personal/cleiaa_connect_ust_hk/EsIM67tInLtAoiWrVCQT1scBar8LO4BwfXJrZr5h0y4mDQ?e=NfDmdy) (70MB for each iamge).
+
+Then, 
+```
+python rawdata_processing.py
+```
+
+Three rgb images will be saved in ./ dir. You can modify the resolutions by yourself in the code.
 
 ## What is a RFC (Reflection-free Flash-only Cue)?
 
