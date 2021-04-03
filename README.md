@@ -86,7 +86,9 @@ Three rgb images will be saved in ./ dir. You can modify the resolutions by your
 
 ## What is a RFC (Reflection-free Flash-only Cue)?
 
-We propose a simple yet effective reflection-free cue for robust reflection removal from a pair of flash and ambient (no-flash) images. The reflection-free cue exploits a flash-only image obtained by subtracting the ambient image from the corresponding flash image in raw data space. The flash-only image is equivalent to an image taken in a dark environment with only a flash on.
+The reflection-free cue exploits a flash-only image obtained by subtracting the ambient image from the corresponding flash image in raw data space. The flash-only image is equivalent to an image taken in a dark environment with only a flash on. The reflection disappears in this flash-only image.
+
+Please check our [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) for detailed explanation.
 
 
 
