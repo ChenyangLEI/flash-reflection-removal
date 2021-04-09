@@ -18,7 +18,7 @@ in CVPR 2021
 - [x] Make project page
 - [x] Release training code
 - [x] Release dataset
-- [ ] Release raw data processing code
+- [x] Release raw data processing code
 
 ## TL;DR quickstart
 
@@ -74,10 +74,21 @@ Then, you can train a model by
 python train.py --model YOUR_MODEL_NAME
 ```
 
+## Raw data preprocessing
+First, download raw images on [OneDrive](https://hkustconnect-my.sharepoint.com/:f:/g/personal/cleiaa_connect_ust_hk/EsIM67tInLtAoiWrVCQT1scBar8LO4BwfXJrZr5h0y4mDQ?e=NfDmdy) (70MB for each iamge).
+
+Then, 
+```
+python rawdata_processing.py
+```
+
+Three rgb images will be saved in ./ dir. You can modify the resolutions by yourself in the code.
 
 ## What is a RFC (Reflection-free Flash-only Cue)?
 
-We propose a simple yet effective reflection-free cue for robust reflection removal from a pair of flash and ambient (no-flash) images. The reflection-free cue exploits a flash-only image obtained by subtracting the ambient image from the corresponding flash image in raw data space. The flash-only image is equivalent to an image taken in a dark environment with only a flash on.
+The reflection-free cue exploits a flash-only image obtained by subtracting the ambient image from the corresponding flash image in raw data space. The flash-only image is equivalent to an image taken in a dark environment with only a flash on. The reflection disappears in this flash-only image.
+
+Please check our [Project Page](https://chenyanglei.github.io/flashrr_rfc/index.html) for detailed explanation.
 
 
 
