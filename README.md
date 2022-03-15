@@ -11,6 +11,8 @@ Tensorflow implementation for: <br>
  HKUST
   
 in CVPR 2021 
+## News
+- [x] 2022.03.15 PyTorch version is released
 
 ## To Do
 - [x] Release test code
