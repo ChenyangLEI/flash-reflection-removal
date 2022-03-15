@@ -1,0 +1,14 @@
+name: frr
+channels:
+  - pytorch
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - pytorch
+  - torchvision
+  - cudatoolkit=10.2
+  - ipython
+  - pip
+  - pip:
+    - -r file:requirements.txt
