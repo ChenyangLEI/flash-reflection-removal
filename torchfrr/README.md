@@ -22,7 +22,7 @@ Test certain configuration and pretrained model.
 For example:
 ```
 GPU_ID=0
-CONFIG=config\alignment\srgb2srgb_fo_dwpwc.py
+CONFIG=config/alignment/srgb2srgb_fo_dwpwc.py
 EXP_NAME=srgb2srgb_fo_dwpwc8
 TEST_NAME=align_test
 python test.py --cfg $CONFIG --gpu $GPU_ID PHASE=hpc NAME=$EXP_NAME TEST.NAME=$TEST_NAME 
