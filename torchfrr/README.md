@@ -3,7 +3,7 @@
 
 ## Prepare environment
 ```
-conda env create -f environment.yml  
+conda env create -f environment.yaml  
 conda activate frr
 mim install mmcv-full
 pip install mmflow
@@ -29,3 +29,9 @@ python test.py --cfg $CONFIG --gpu $GPU_ID PHASE=hpc NAME=$EXP_NAME TEST.NAME=$T
 ```
 
 
+## To Do
+- [x] Release test code
+- [x] Release dataset
+- [ ] Prepare paper and upload to arxiv
+- [ ] Release training code
+- [ ] Release raw data processing code
