@@ -4,11 +4,10 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - python
-  - pytorch
+  - python=3.9
+  - pytorch=1.9
   - torchvision
   - cudatoolkit=10.2
-  - ipython
   - pip
   - pip:
-    - -r file:requirements.txt
+    - -r requirements.txt

@@ -15,7 +15,7 @@ cfg = None
 
 def load_omgcfg(path: str):
     if path.endswith('.py'):
-        path = path[:-3].replace('/', '.')
+        path = path[:-3].replace('/', '.').replace('\\',".")
         cfg = importlib.import_module(path)._C.copy()
     elif path.endswith('.yaml'):
         cfg = OmegaConf.load(path)
@@ -23,9 +23,6 @@ def load_omgcfg(path: str):
             includes = [load_omgcfg(x) for x in cfg.INCLUDES]
             cfg.merge_with(*includes)
     return cfg
-
-
-
 
 def get_cfg(mode):
     # select configuration file and gpu according to argument
@@ -71,4 +68,3 @@ def cfg_setup(cfg):
 
     if cfg.TRAIN.DETERMINISTIC:
         set_deterministic()
-

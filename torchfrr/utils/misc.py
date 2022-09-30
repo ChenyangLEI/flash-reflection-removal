@@ -1,13 +1,21 @@
-import itertools
 import os
-import os.path as osp
 import random
-from multiprocessing import Queue
 import numpy as np
 import torch
 
-queue = Queue()
 
+def manual_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+
+
+def set_deterministic():
+    os.environ["CUBLAS_WORKSPACE_CONFIG"] = ':4096:8'
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    torch.use_deterministic_algorithms(True)
+    
 class AvgDict(object):
     def __init__(self):
         self.data = {}
@@ -35,26 +43,8 @@ class AvgDict(object):
     def mean(self):
         return {k: v / self.count for k, v in self.data.items()}
 
-
-
-def identity(x):
-    return x
-
-
 def zip_broadcast(*ls):
     maxlen = max(len(x) for x in ls if not isinstance(ls, str))
     ls = (itertools.repeat(x, maxlen) if isinstance(x, str) else x for x in ls)
     return list(zip(*ls))
 
-
-def manual_seed(seed):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-
-
-def set_deterministic():
-    os.environ["CUBLAS_WORKSPACE_CONFIG"] = ':4096:8'
-    torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
-    torch.use_deterministic_algorithms(True)

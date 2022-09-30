@@ -1,11 +1,18 @@
-from transforms.registry import TRANSFORMS
-import transforms.nntransforms
-import transforms.pttransforms
+import transforms.altransforms
+import transforms.dpttransform
+import transforms.drtransforms
 import transforms.iotransforms
+import transforms.losstransforms
+import transforms.mmtransforms
+import transforms.nntransforms
+import transforms.nptransforms
+import transforms.perctransforms
+import transforms.pttransforms
 import transforms.transforms
+from transforms.registry import TRANSFORMS
+
 
 def get_transform(name, args=(), kwargs={}):
-    # print(name, args, flush=True)
     return TRANSFORMS[name](*args, **kwargs)
 
 

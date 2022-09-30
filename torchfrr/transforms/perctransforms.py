@@ -1,10 +1,12 @@
-import enum
-import os
+from functools import lru_cache
+
+import lpips
 import torch
+import torch.nn.functional as F
 import torchvision
 from torch import nn
-import torch.nn.functional as F
-from functools import lru_cache
+
+from transforms.registry import TRANSFORMS
 
 
 @lru_cache
@@ -13,6 +15,33 @@ def get_perc_lossfn(num_layers=1, cuda=True):
     if cuda:
         loss_fn.cuda()
     return loss_fn
+
+@ TRANSFORMS.register
+class ImgsPerceptualLoss:
+    def __init__(self, trips, num_layers=1, cuda=True):
+        super().__init__()
+        self.trips = trips
+        self.loss_fn = get_perc_lossfn(num_layers, cuda)
+
+    def __call__(self, data):
+        for name, image_true, image_test in self.trips:
+            data['losses'][name] = self.loss_fn(
+                data['imgs'][image_true], data['imgs'][image_test])
+        return data
+
+@ TRANSFORMS.register
+class ImgsLpips:
+    def __init__(self, trips, num_layers=1, cuda=True):
+        super().__init__()
+        self.trips = trips
+        self.loss_fn = lpips.LPIPS(net='alex')
+        self.loss_fn.cuda()
+
+    def __call__(self, data):
+        for name, image_true, image_test in self.trips:
+            data['metrics'][ 'lpips_' + name] = self.loss_fn(
+                data['imgs'][image_true], data['imgs'][image_test])
+        return data
 
 
 class PerceptualLoss(nn.Module):

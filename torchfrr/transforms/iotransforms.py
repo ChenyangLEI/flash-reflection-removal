@@ -1,20 +1,19 @@
-from collections import defaultdict
-import time
-from torch.functional import Tensor
-from torchvision.utils import make_grid
-from utils.io import imdecode, imread, pkread, imwrite, open_lmdb
-import numpy as np
-import pickle
-import pandas as pd
-import os.path as osp
-from utils.path import mkdir
-import cv2 as cv
-import os
-from transforms.registry import TRANSFORMS
-import utils
-from utils.io import LMDBWriter, imtwrite
-from utils.misc import AvgDict
 import logging
+import os
+import os.path as osp
+import pickle
+import time
+from collections import defaultdict
+
+import numpy as np
+import pandas as pd
+import utils
+from torch.functional import Tensor
+from utils.io import imdecode, imread, imtwrite, open_lmdb
+from utils.misc import AvgDict
+
+from transforms.functional import blosc_decode_np
+from transforms.registry import TRANSFORMS
 
 
 @TRANSFORMS.register
@@ -37,7 +36,7 @@ class EpochImgsWrite:
         if self.epoch != epoch:
             self.epoch = epoch
             self.epoch_dir = osp.join(self.root, f"{self.prefix}_{epoch:04d}")
-            mkdir(self.epoch_dir)
+            os.makedirs(self.epoch_dir,exist_ok=True)
         save_freq = data['save_freq'][0].item(
         ) if'save_freq' in data else self.save_freq
 
@@ -80,7 +79,7 @@ class EpochMetricsLog:
             self.flush()
             self.epoch = epoch
             self.epoch_dir = osp.join(self.root, f"{self.prefix}_{epoch:04d}")
-            mkdir(self.epoch_dir)
+            os.makedirs(self.epoch_dir,exist_ok=True)
         self.metrics_dict['dataset_name'].append(data['dataset_name'][0])
         self.metrics_dict['data_name'].append(
             f"{data['dataset_name'][0]}_{data['idx'][0].item():04d}")
@@ -104,8 +103,9 @@ class EpochMetricsLog:
         avg_metric = {'_'.join([ds_name, k]): v
                       for ds_name, ds_loss in avg_metric.iterrows()
                       for k, v in ds_loss.items()}
-        for k, v in avg_metric.items():
-            self.tb_writer.add_scalar(k, v, self.epoch)
+        if self.tb_writer:
+            for k, v in avg_metric.items():
+                self.tb_writer.add_scalar(k, v, self.epoch)
         loss_message = ' | '.join(
             f"{k}: {v:.2f}" for k, v in avg_metric.items())
         current_time = time.time()
@@ -148,62 +148,6 @@ class StepMetricsLog:
         return data
 
 
-@TRANSFORMS.register
-class SixGridWrite:
-    """ Write images to tbnail"""
-
-    def __init__(self, save_freq=100, root=None, scale=0.5) -> None:
-        self.root = root
-        self.save_freq = save_freq
-        self.step = int(1 / scale)
-        self.epoch = None
-        self.epoch_dir = None
-
-    def __call__(self, data):
-        batch_id = data['batch_id']
-        epoch = data['epoch']
-        if self.epoch != epoch:
-            self.epoch = epoch
-            self.epoch_dir = osp.join(self.root, f"{epoch:04d}")
-            mkdir(self.epoch_dir)
-
-        if ((batch_id % self.save_freq == 0) or
-                ('save_freq' in data and batch_id % data['save_freq'][0].item() == 0)):
-            imgs = [data['imgs'][x][0].detach() for x in (
-                'ab', 'ab_T_pred', 'ab_T', 'fo', 'ab_R_pred', 'ab_R')]
-            if imgs[3].shape[0] == 1:
-                imgs[3] = imgs[3].expand(3, -1, -1)
-            grid = make_grid(imgs, nrow=3)[:, ::self.step, ::self.step]
-            out_path = osp.join(self.epoch_dir,
-                                f"{data['dataset_name'][0]}_{data['idx'][0].item():04d}.jpg")
-            imtwrite(out_path, grid)
-
-        return data
-
-
-class TbnailWrite:
-    """ Write images to tbnail"""
-
-    def __init__(self, root, outdir='tbn', scale=1 / 8) -> None:
-        self.root = root
-        self.scale = scale
-        self.outdir = outdir
-        mkdir(osp.join(root, outdir))
-
-    def __call__(self, data):
-        imgs = data['imgs']
-        idx = data['idx']
-        scale = self.scale
-        for k, v in imgs.items():
-            # print(k)
-            # print(v.max())
-            # print(v.shape)
-            img = cv.resize((np.clip(v, 0, 1)**(1 / 2.2) *
-                            255).astype(np.uint8), None, fx=scale, fy=scale)
-            imwrite(osp.join(self.root, self.outdir,
-                    f'{idx:03d}_{k}.jpg'), img)
-
-        return data
 
 
 class LmdbImgReader:
@@ -217,9 +161,10 @@ class LmdbImgReader:
         if self.fmt == 'img':
             img = imdecode(np.frombuffer(
                 imgc, dtype=np.uint8))
+        elif self.fmt == 'blosc':
+            img = blosc_decode_np(pickle.loads(imgc))
 
         return img
-        # return self.c
 
 
 class IdxFolderImgsRead:
@@ -288,4 +233,3 @@ class RandLmdbImgRead:
             self.idx = 0
 
         return data
-

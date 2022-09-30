@@ -1,12 +1,15 @@
 
-from collections import defaultdict
 import logging
-from torch.utils.data.dataset import ConcatDataset
+from collections import defaultdict
 
+from torch.utils.data.dataset import ConcatDataset
 from torchvision.transforms.transforms import Compose
 from transforms import get_transforms
+
+import datasets.folderdatasets
+import datasets.lmdbdatasets
 from datasets.registry import DATASETS
-import datasets.lmdbdataset
+
 
 def build_dataset(name, cfg, trans=[]):
     logging.info(f'building dataset: {name}')

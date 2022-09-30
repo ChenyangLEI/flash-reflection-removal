@@ -6,7 +6,9 @@ from omegaconf import OmegaConf
 from torch.utils.data import DataLoader
 from torchvision.transforms.transforms import Compose
 
-from train import validate
+from tqdm import tqdm
+import torch
+# from train import validate
 from utils.config import cfg_setup, get_cfg
 cfg = get_cfg('test')
 cfg_setup(cfg)
@@ -14,6 +16,7 @@ from datasets import get_datasets
 from models import get_models
 from transforms import get_transforms
 from utils.io import log_init, resume_ckpt
+from collections import defaultdict
 
 
 def main():
@@ -21,6 +24,21 @@ def main():
     logging.info(f'Configurations:  \n{OmegaConf.to_yaml(cfg)}')
     test(cfg)
 
+def validate(val_dataloader, read_trans, model, val_metric_fn, epoch, loss_fn=None):
+    model.eval()
+    with torch.no_grad():
+        for batch_id, batch in enumerate(tqdm(val_dataloader, disable=None)):
+            batch = defaultdict(dict, batch)
+            batch.update({
+                'epoch': epoch,
+                'batch_id': batch_id,
+            })
+            batch = read_trans(batch)
+            batch = model(batch)
+            if loss_fn:
+                batch = loss_fn(batch)
+                batch['metrics'].update(batch['losses'])
+            val_metric_fn(batch)
 
 def test(cfg):
 

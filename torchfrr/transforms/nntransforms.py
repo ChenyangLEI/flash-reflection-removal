@@ -1,8 +1,7 @@
 from itertools import accumulate
 
 import torch
-from nn.conv import DownDoubleConv, UpCat, UpCatDoubleConv
-from nn.loss import get_perc_lossfn
+from models.layers import DownDoubleConv, UpCat, UpCatDoubleConv
 from torch import nn
 
 from transforms.registry import TRANSFORMS
@@ -100,16 +99,5 @@ class UNet(nn.Module):
 
         return data
 
-@ TRANSFORMS.register
-class ImgsPerceptualLoss:
-    def __init__(self, trips, num_layers=1, cuda=True):
-        super().__init__()
-        self.trips = trips
-        self.loss_fn = get_perc_lossfn(num_layers, cuda)
 
-    def __call__(self, data):
-        for name, image_true, image_test in self.trips:
-            data['losses'][name] = self.loss_fn(
-                data['imgs'][image_true], data['imgs'][image_test])
-        return data
 

@@ -66,6 +66,33 @@ def peak_signal_noise_ratio(image_true, image_test, dmin=0, dmax=1):
     return psnr, err
 
 
+def blosc_encode_tensor(a, cname='lz4', clevel=3):
+    assert a.is_contiguous()
+    assert a.dtype == torch.float32
+    return (blosc.compress_ptr(a.data_ptr(),
+                               a.numel(), 4, clevel=clevel,
+                               cname=cname, shuffle=blosc.SHUFFLE), a.shape)
+
+
+def blosc_decode_tensor(pair):
+    b, shape = pair
+    arr = torch.empty(shape, dtype=torch.float32)
+    blosc.decompress_ptr(b, arr.data_ptr())
+    return arr
+
+
+def blosc_encode_np(a, cname='lz4', clevel=3):
+    a = np.ascontiguousarray(a)
+    assert a.dtype == np.float32
+    return (blosc.compress_ptr(a.__array_interface__['data'][0],
+                               a.size, a.dtype.itemsize, clevel=clevel, cname=cname, shuffle=blosc.SHUFFLE), a.shape)
+
+
+def blosc_decode_np(pair):
+    b, shape = pair
+    arr = np.empty(shape, dtype=np.float32)
+    blosc.decompress_ptr(b, arr.__array_interface__['data'][0])
+    return arr
 
 
 def img2float(img):
