@@ -15,7 +15,7 @@ pip install -r requirements_dev.txt
 
 ## Download Data and Pretrained models
 
-Download test data and pretrained models from [onedrive](https://hkustconnect-my.sharepoint.com/:f:/g/personal/xjiangan_connect_ust_hk/EuM-fkWwAKlOjetolgSXRM4BEl1uai4mwLdiKAM_ka6_iA?e=HU63Gc)
+Download data and pretrained models from [onedrive](https://hkustconnect-my.sharepoint.com/:f:/g/personal/xjiangan_connect_ust_hk/EuM-fkWwAKlOjetolgSXRM4BEl1uai4mwLdiKAM_ka6_iA?e=HU63Gc)
 
 For training, create a folder `dpt_weights` and download DPT pretrained weights [dpt_hybrid-midas-501f0c75.pt](https://github.com/intel-isl/DPT/releases/download/1_0/dpt_hybrid-midas-501f0c75.pt) there.
 
