@@ -22,6 +22,8 @@ def load_omgcfg(path: str):
         if 'INCLUDES' in cfg:
             includes = [load_omgcfg(x) for x in cfg.INCLUDES]
             cfg.merge_with(*includes)
+    else:
+        raise ValueError(f'Unknown config file type: {path}')
     return cfg
 
 def get_cfg(mode):

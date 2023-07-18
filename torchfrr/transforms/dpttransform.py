@@ -33,7 +33,7 @@ class DPTDepth(nn.Module):
         set scale to normalize depth and resize to input """
 
     def __init__(self, pairs, scale=None, gamma=False,
-                 model_path='../DPT/weights/dpt_hybrid-midas-501f0c75.pt'):
+                 model_path='dpt_weights/dpt_hybrid-midas-501f0c75.pt'):
         super().__init__()
         self.scale_inv = 1 / scale if scale else None
         self.pairs = pairs

@@ -18,7 +18,7 @@ def get_glctx():
 
 @TRANSFORMS.register
 class RandDepthWarp:
-    def __init__(self, max_tran=0.015, max_angle=np.pi / 180,
+    def __init__(self, max_tran=0.01, max_angle=np.pi / 180,
                  rshift_range=(-0.1, 32), gcd=64):
         self.glctx = get_glctx()
         self.max_tran = max_tran

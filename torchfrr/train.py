@@ -99,7 +99,12 @@ def train(cfg):
             })
             with torch.no_grad():
                 batch = read_trans(batch)
-            batch = model(batch)
+            try:
+                batch = model(batch)
+            except RuntimeError as e:
+                logging.error("run time error")
+                logging.error(e)
+                continue
             batch = loss_fn(batch)
             if not batch.get('invalid', False):
                 opt.zero_grad(set_to_none=True)
@@ -139,7 +144,12 @@ def validate(val_dataloader, read_trans, model, val_metric_fn, epoch, loss_fn=No
                 'batch_id': batch_id,
             })
             batch = read_trans(batch)
-            batch = model(batch)
+            try:
+                batch = model(batch)
+            except RuntimeError as e:
+                logging.error("run time error")
+                logging.error(e)
+                continue
             if loss_fn:
                 batch = loss_fn(batch)
                 batch['metrics'].update(batch['losses'])

@@ -1,0 +1,2 @@
+git+https://github.com/isl-org/DPT.git
+git+https://github.com/NVlabs/nvdiffrast.git

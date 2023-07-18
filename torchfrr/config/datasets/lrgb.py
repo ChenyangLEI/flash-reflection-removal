@@ -1,9 +1,9 @@
 from omegaconf import OmegaConf
 
 DATA_CFG = {
-    'aflrgb_train': "data/rawfr/synthetic/syn_reflection/train/lmdb_lrgb",
-    'aflrgb_test': "data/rawfr/synthetic/syn_reflection/test/lmdb_lrgb",
-    'rpath': "data/rawfr/refreal/lmdb",
+    'aflrgb_train': "data/synthetic/syn_reflection/train/lmdb_lrgb",
+    'aflrgb_test': "data/synthetic/syn_reflection/test/lmdb_lrgb",
+    'rpath': "data/refreal/lmdb",
     'rtrain': "abR_train.csv",
     'rtest': "abR_test.csv",
     'real_root': 'data/real_world',
