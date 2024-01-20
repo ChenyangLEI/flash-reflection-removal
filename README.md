@@ -105,14 +105,15 @@ If you find our work useful for your research, please consider citing the follow
      booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
      year = {2021}
 }
-@misc{lei2022robust,
-      title={Robust Reflection Removal with Flash-only Cues in the Wild}, 
-      author={Chenyang Lei and Xudong Jiang and Qifeng Chen},
-      year={2022},
-      eprint={2211.02914},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
+@ARTICLE{10250963,
+  author={Lei, Chenyang and Jiang, Xudong and Chen, Qifeng},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Robust Reflection Removal With Flash-Only Cues in the Wild}, 
+  year={2023},
+  volume={45},
+  number={12},
+  pages={15530-15545},
+  doi={10.1109/TPAMI.2023.3314972}}
 ```
 If you are also interested in the polarization reflection removal, please refer to [this work](https://github.com/ChenyangLEI/polarization-reflection-removal).
 
