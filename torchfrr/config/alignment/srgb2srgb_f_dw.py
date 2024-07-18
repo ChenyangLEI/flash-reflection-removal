@@ -1,6 +1,6 @@
 from omegaconf import OmegaConf
 from config.omega.srgb2srgb_f import _C
-from config.datasets.randhomrt import DATA_CFG, DATA_TRANSFORMS, DATASETS
+from config.datasets.randhomrt import DATA_TRANSFORMS, DATASETS
 
 _C = _C.copy()
 _C.DATASETS = OmegaConf.merge(OmegaConf.masked_copy(_C.DATASETS, [
@@ -13,10 +13,14 @@ _C.DATASETS = OmegaConf.merge(OmegaConf.masked_copy(_C.DATASETS, [
 ]) , OmegaConf.masked_copy(DATASETS, [
     "real2ma_test",
     'real2masa_test',
-    'handheld_eval'
 ]))
-_C.DATA_CFG = DATA_CFG
-_C.DATA_TRANSFORMS = DATA_TRANSFORMS
+_C.DATA_TRANSFORMS = OmegaConf.merge(_C.DATA_TRANSFORMS, 
+    OmegaConf.masked_copy(OmegaConf.create(DATA_TRANSFORMS), [
+        'real2masa_trans',
+        'real2ma_trans',
+]))
+                                         
+
 _C.READ_TRANSFORMS = OmegaConf.create([
     ['ToCuda', [['ab_R', 'ab_T', 'fo', 'ab']]],
     ["ClampImgs", [['ab_T', 'ab_R', 'ab']]],
