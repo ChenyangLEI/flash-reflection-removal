@@ -14,7 +14,7 @@ DATASETS.update({
         "dataset_args": {
                 "root": '${DATA_CFG.handheld_root}',
                 "subdirs": ('wild',),
-                "ls_name": 'trip.csv',
+                "ls_name": 'pair.csv',
                 "img_names": ['ab', 'f'],
                 "repeat": 1,
                 "save_freq": 1,

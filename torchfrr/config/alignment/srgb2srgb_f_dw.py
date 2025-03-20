@@ -13,11 +13,13 @@ _C.DATASETS = OmegaConf.merge(OmegaConf.masked_copy(_C.DATASETS, [
 ]) , OmegaConf.masked_copy(DATASETS, [
     "real2ma_test",
     'real2masa_test',
+    "handheld_eval",
 ]))
 _C.DATA_TRANSFORMS = OmegaConf.merge(_C.DATA_TRANSFORMS, 
     OmegaConf.masked_copy(OmegaConf.create(DATA_TRANSFORMS), [
         'real2masa_trans',
         'real2ma_trans',
+        'handheld_trans',
 ]))
                                          
 
